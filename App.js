@@ -74,7 +74,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "teal",
+    backgroundColor: "#FAE100",
   },
   city: {
     flex: 1,
@@ -83,7 +83,6 @@ const styles = StyleSheet.create({
   },
   weather: {},
   cityName: {
-    color: "white",
     fontSize: 68,
     fontWeight: "500",
   },
