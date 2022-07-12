@@ -51,7 +51,7 @@ export default function App() {
         contentContainerStyle={styles.weather}
       >
         {days.length === 0 ? (
-          <View style={styles.day}>
+          <View style={styles.loading}>
             <ActivityIndicator color="white" size="large" />
           </View>
         ) : (
@@ -88,10 +88,11 @@ const styles = StyleSheet.create({
   },
   day: {
     width: SCREEN_WIDTH,
-    alignItems: "center",
+    alignItems: "flex-start",
+    marginLeft: 20,
   },
   temp: {
-    fontSize: 178,
+    fontSize: 130,
     marginTop: 50,
     fontWeight: "400",
   },
@@ -101,5 +102,9 @@ const styles = StyleSheet.create({
   },
   tinyText: {
     fontSize: 20,
+  },
+  loading: {
+    justifyContent: " center",
+    alignItems: "center",
   },
 });
