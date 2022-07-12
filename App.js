@@ -9,9 +9,18 @@ import {
 import { StatusBar } from "expo-status-bar";
 import { useEffect, useState } from "react";
 import * as Location from "expo-location";
-
+import { Fontisto } from "@expo/vector-icons";
 const { width: SCREEN_WIDTH } = Dimensions.get("window");
 const API_KEY = "580bb1eab5d7d4882b4e79d1acc6aded";
+const icons = {
+  Clouds: "cloudy",
+  Clear: "day-sunny",
+  Atmosphere: "cloudy-gusts",
+  Snow: "snow",
+  Rain: "rains",
+  Drizzle: "rain",
+  Thunderstorm: "lightning",
+};
 
 export default function App() {
   const [city, setCity] = useState("loading..");
@@ -51,15 +60,33 @@ export default function App() {
         contentContainerStyle={styles.weather}
       >
         {days.length === 0 ? (
-          <View style={styles.loading}>
-            <ActivityIndicator color="white" size="large" />
+          <View style={{ ...styles.day, alignItems: "center" }}>
+            <ActivityIndicator
+              style={{ marginTop: 10 }}
+              color="white"
+              size="large"
+            />
           </View>
         ) : (
           days.map((day, index) => (
             <View key={index} style={styles.day}>
-              <Text style={styles.temp}>
-                {parseFloat(day.temp.day).toFixed(1)}
-              </Text>
+              <View
+                style={{
+                  flexDirection: "row",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  width: "100%",
+                }}
+              >
+                <Text style={styles.temp}>
+                  {parseFloat(day.temp.day).toFixed(1)}
+                </Text>
+                <Fontisto
+                  name={icons[day.weather[0].main]}
+                  size={68}
+                  color="black"
+                />
+              </View>
               <Text style={styles.description}>{day.weather[0].main}</Text>
               <Text style={styles.tinyText}>{day.weather[0].description}</Text>
             </View>
@@ -89,22 +116,20 @@ const styles = StyleSheet.create({
   day: {
     width: SCREEN_WIDTH,
     alignItems: "flex-start",
-    marginLeft: 20,
+    paddingHorizontal: 20,
   },
   temp: {
-    fontSize: 130,
+    fontSize: 120,
     marginTop: 50,
     fontWeight: "400",
   },
   description: {
-    fontSize: 60,
-    marginTop: -30,
+    fontSize: 30,
+    fontWeight: "500",
   },
   tinyText: {
-    fontSize: 20,
-  },
-  loading: {
-    justifyContent: " center",
-    alignItems: "center",
+    fontSize: 25,
+    marginTop: -5,
+    fontWeight: "500",
   },
 });
